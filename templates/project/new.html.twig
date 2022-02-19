@@ -1,0 +1,11 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Nouveau projet{% endblock %}
+
+{% block main %}
+    <h1 class="row justify-content-md-center my-3 mx-0 indieFlower">Créer un nouveau projet</h1>
+
+    {{ include('project/_form.html.twig') }}
+
+    <a class="btn btn-outline-primary" href="{{ path('project_index') }}">Retour</a>
+{% endblock %}

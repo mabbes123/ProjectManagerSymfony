@@ -1,0 +1,14 @@
+/* ========== Fonts for website ========== */
+@font-face {
+    font-family: "IndieFlower-Regular";
+    src:url("IndieFlower-Regular.ttf");
+  }
+
+  .indieFlower {
+  font-family: IndieFlower-Regular;
+}
+
+.form-control{
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

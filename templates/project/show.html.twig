@@ -1,0 +1,56 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block main %}
+
+<div class="card mb-3 bg-light animate__animated animate__bounceInLeft">
+    <h3 class="card-header indieFlower d-flex justify-content-center">{{ project.title }}</h3>
+    <div class="card-body">
+        <h5 class="card-title d-flex justify-content-center">{{ project.description }}</h5>
+    </div>
+        <h3 class="indieFlower card-header d-flex justify-content-center">A faire</h3>
+    <ul class="list-group list-group-flush">
+        {% for task in tasks %}
+            <a href="{{ path('task_edit', {'id': task.id}) }}" style="text-decoration:none">
+            {% if task.getStatus() == 'done' %}
+                <li class="list-group-item bg-success text-white">
+                {% else %}
+                    <li class="list-group-item">
+            {% endif %}
+            <h4 class="d-flex justify-content-center">{{ task.title }}</h4>
+            <span class="d-flex justify-content-end">Deadline: {{ task.deadline|date('Y-m-d')  }}</span>
+            <p class="d-flex justify-content-end">{% set difference = date(task.deadline).diff(date(date)) %}
+            {% set leftDays = difference.days %}
+                {% if leftDays == 1 %}
+                1 day
+                {% else %}
+                {{ leftDays }} jours restants
+            {% endif %}
+        </p>
+            </li>
+            </a>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('task_new', {id: project.id}) }}" class="card-link card-body bg-primary">
+        <h4 class="d-flex justify-content-center my-2 text-white">Ajouter une tâche</h4>
+    </a>
+    <div class="card-footer text-muted">
+        Deadline du projet : {{ project.deadline|date('Y-m-d') }}
+        <p>{% set difference = date(project.deadline).diff(date(date)) %}
+            {% set leftDays = difference.days %}
+                {% if leftDays == 1 %}
+                1 day
+                {% else %}
+                {{ leftDays }} jours restants
+            {% endif %}
+        </p>
+    </div>
+    
+</div>
+<a class="btn btn-outline-primary mr-2" href="{{ path('project_index') }}">Retour</a>
+
+<a class="btn btn-outline-success" href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
+
+    {{ include('project/_delete_form.html.twig') }}
+{% endblock %}

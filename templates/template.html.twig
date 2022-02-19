@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div>
+    <a class="btn btn-outline-light navbar-brand indieFlower" href="{{ path('project_index')}}">ProjectManager</a>
+    <img style="width: 5vh" src="\img\casque.png" alt="casque">
+    
+  </div>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{{ path('project_new') }}">Nouveau projet</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{{ path('project_archived') }}">Projets archivés</a>
+      </li>
+    </ul>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <p class="my-2 my-sm-0 mx-2">{{ app.user.pseudo }}</p>
+      <a class="btn btn-outline-light my-2 my-sm-0 text-white" type="submit" href="{{ path('app_logout') }}">Deconnexion</a>
+    {% else %}
+        <a class="btn btn-secondary my-2 my-sm-0" type="submit" href="{{ path('app_register') }}">S'enregistrer</a>
+    {% endif %}
+  </div>
+
+</nav>
+
+<div id="date" class="row justify-content-center my-3 mx-0 text-primary display-4 indieFlower"></div>
+<div class="container my-5">
+
+{% block main %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/script.js') }}"></script>
+{% endblock %}

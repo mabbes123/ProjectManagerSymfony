@@ -1,0 +1,12 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Modifier projet{% endblock %}
+
+{% block main %}
+    <h1 class="row justify-content-md-center my-3 mx-0 indieFlower">Modifier</h1>
+
+    {{ include('project/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="btn btn-primary" href="{{ path('project_index') }}">Retour</a>
+
+{% endblock %}

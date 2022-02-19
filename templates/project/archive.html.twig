@@ -1,0 +1,27 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Archive{% endblock %}
+
+{% block main %}
+
+
+
+    <h1 class="row justify-content-md-center my-3 mx-0 indieFlower">Vos projets archivés</h1>
+    <div class="row justify-content-md-center p-0">
+        {% for project in projects %}
+            {% if project.getStatus() == 'done' %}
+                <a class="col- col-sm-6 col-lg-3 justify-content-md-center" style="text-decoration:none" href="{{ path('project_show', {'id': project.id}) }}">
+                    <div class="card text-white bg-secondary mb-5 animate__animated animate__bounceInLeft" style="max-width: 20rem;">
+                        <div class="card-header">{{ project.registered ? project.registered|date('Y-m-d') : '' }}</div>
+                        <div class="card-body">
+                            <h4 class="card-title indieFlower">{{ project.title }}</h4>
+                            <p class="card-text">{{ project.description }}</p>
+                            <p class="card-title">Deadline : {{ project.deadline ? project.deadline|date('Y-m-d') : '' }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endif %}            
+        {% endfor %}
+    </div>    
+        
+{% endblock %}
